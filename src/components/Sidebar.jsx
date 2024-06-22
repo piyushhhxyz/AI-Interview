@@ -20,7 +20,7 @@ const Sidebar = () => {
 
   return (
     <aside className={`bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100 transition-all duration-300 ${isExpanded ? 'w-64' : 'w-20'} min-h-screen flex flex-col shadow-lg`}>
-      <div className="p-4 flex justify-between items-center border-b border-gray-700">
+      <div className="p-5 flex justify-between items-center border-b border-gray-700">
         {isExpanded && (
           <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text">
             WellHire.ai

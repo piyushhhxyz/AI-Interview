@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom'; // Add this import
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, Legend } from 'recharts';
 import { Home, Briefcase, Users, PieChart as PieChartIcon, Settings, Sun, Moon, Clock, TrendingUp } from 'lucide-react';
+
 
 const Dashboard = () => {
   const [darkMode, setDarkMode] = useState(true);
@@ -8,12 +10,13 @@ const Dashboard = () => {
   const toggleTheme = () => setDarkMode(!darkMode);
 
   const applicationData = [
-    { month: 'Jan', applications: 65 },
-    { month: 'Feb', applications: 59 },
-    { month: 'Mar', applications: 80 },
-    { month: 'Apr', applications: 81 },
-    { month: 'May', applications: 56 },
-    { month: 'Jun', applications: 55 },
+    { stage: 'Resume Screened', count: 1000 },
+    { stage: 'Applied', count: 500 },
+    { stage: 'AI Interview Invited', count: 550 },
+    { stage: 'AI Interview Completed', count: 750 },
+    { stage: 'Human Interview', count: 233 },
+    { stage: 'Offer Extended', count: 150 },
+    { stage: 'Hired', count: 420 },
   ];
 
   const sourceData = [
@@ -48,21 +51,21 @@ const Dashboard = () => {
         <h1 className="text-3xl font-bold mb-10 text-purple-500">WellHire.ai</h1>
         <nav className="space-y-4">
           {[
-            { icon: <Home size={20} />, label: 'Dashboard' },
-            { icon: <Briefcase size={20} />, label: 'Job Postings' },
-            { icon: <Users size={20} />, label: 'Candidates' },
-            { icon: <PieChartIcon size={20} />, label: 'Reports' },
-            { icon: <Settings size={20} />, label: 'Settings' },
-          ].map(({ icon, label }) => (
-            <a key={label} href="#" className={`flex items-center space-x-2 ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
+            { icon: <Home size={20} />, label: 'Dashboard', path: '/' },
+            { icon: <Users size={20} />, label: 'Candidates', path: '/candidates' },
+            { icon: <Briefcase size={20} />, label: 'Resumes', path: '/resumes' },
+            { icon: <PieChartIcon size={20} />, label: 'AI Interview', path: '/ai-interview' },
+            { icon: <Settings size={20} />, label: 'Evaluations', path: '/evaluations' },
+          ].map(({ icon, label, path }) => (
+            <Link key={label} to={path} className={`flex items-center space-x-2 ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
               {icon}
               <span>{label}</span>
-            </a>
+            </Link>
           ))}
-        </nav>
+        </nav>    
       </aside>
 
-      {/* Main content */}
+      {/* Main content */}                                        
       <main className="flex-1 p-8 overflow-auto">
         <div className="flex justify-between items-center mb-8">
           <h2 className="text-3xl font-bold">Hiring Dashboard</h2>
@@ -104,20 +107,20 @@ const Dashboard = () => {
         {/* Charts and Widgets */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
           <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white shadow-md'}`}>
-            <h3 className="text-xl font-semibold mb-4">Application Funnel</h3>
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={applicationData}>
-                <CartesianGrid strokeDasharray="3 3" stroke={darkMode ? '#374151' : '#e5e7eb'} />
-                <XAxis dataKey="month" stroke={darkMode ? '#9ca3af' : '#4b5563'} />
-                <YAxis stroke={darkMode ? '#9ca3af' : '#4b5563'} />
-                <Tooltip
-                  contentStyle={{ backgroundColor: darkMode ? '#1f2937' : '#ffffff', border: 'none' }}
-                  labelStyle={{ color: darkMode ? '#ffffff' : '#000000' }}
-                />
-                <Line type="monotone" dataKey="applications" stroke="#8884d8" strokeWidth={2} />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+      <h3 className="text-xl font-semibold mb-4">TalentFlow™ Pipeline</h3>
+      <ResponsiveContainer width="100%" height={300}>
+        <LineChart data={applicationData}>
+          <CartesianGrid strokeDasharray="3 3" stroke={darkMode ? '#374151' : '#e5e7eb'} />
+          <XAxis dataKey="stage" stroke={darkMode ? '#9ca3af' : '#4b5563'} angle={-45} textAnchor="end" height={80} />
+          <YAxis stroke={darkMode ? '#9ca3af' : '#4b5563'} />
+          <Tooltip
+            contentStyle={{ backgroundColor: darkMode ? '#1f2937' : '#ffffff', border: 'none' }}
+            labelStyle={{ color: darkMode ? '#ffffff' : '#000000' }}
+          />
+          <Line type="monotone" dataKey="count" stroke="#8884d8" strokeWidth={2} />
+        </LineChart>
+      </ResponsiveContainer>
+    </div>
           <div className={`p-6 rounded-lg ${darkMode ? 'bg-gray-800' : 'bg-white shadow-md'}`}>
             <h3 className="text-xl font-semibold mb-4">Source Breakdown</h3>
             <ResponsiveContainer width="100%" height={300}>

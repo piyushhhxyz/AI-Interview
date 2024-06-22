@@ -1,34 +1,23 @@
-import React from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Dashboard from './components/Dashboard';
+import Candidates from './pages/Candidates';
+import Resumes from './pages/ResumeVault';
+import AIInterview from './pages/AIInterview';
+import Evaluations from './pages/Evaluations';
+// import TalentCompass from './pages/TalentCompass';
 
 function App() {
   return (
-    <div className="App">
-      <Dashboard />
-    </div>
+    <Router>
+      <Routes>
+        <Route exact path="/" element={<Dashboard />} />
+        <Route path="/candidates" element={<Candidates />} />
+        <Route path="/resumes" element={<Resumes />} />
+        <Route path="/ai-interview" element={<AIInterview />} />
+        <Route path="/evaluations" element={<Evaluations />} />
+      </Routes>
+    </Router>
   );
 }
 
 export default App;
-
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-// import Dashboard from './components/Dashboard';
-// import TalentCompass from './pages/TalentCompass';
-// import ResumeVault from './pages/ResumeVault';
-// // import AIInterviewMaestro from './pages/AIInterviewMaestro';
-// import TalentEvaluator from './pages/TalentEvaluator';
-
-// function App() {
-//   return (
-//     <Router>
-//       <Routes>
-//         <Route path="/" element={<Dashboard />} />
-//         <Route path="/talent-compass" element={<TalentCompass />} />
-//         <Route path="/resume-vault" element={<ResumeVault />} />
-//         <Route path="/talent-evaluator" element={<TalentEvaluator />} />
-//       </Routes>
-//     </Router>
-//   );
-// }
-
-// export default App;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Users, FileText, Video, Star, ChevronLeft, ChevronRight, User, Settings, HelpCircle } from 'lucide-react';
+import { Home, Users, FileText, Video, Star, ChevronLeft, ChevronRight, User, Settings, HelpCircle, LogOut } from 'lucide-react';
 
 const Sidebar = () => {
   const [isExpanded, setIsExpanded] = useState(true);
@@ -19,57 +19,61 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className={`bg-gray-800 text-white transition-all duration-300 ${isExpanded ? 'w-64' : 'w-20'} min-h-screen flex flex-col`}>
-      <div className="p-4 flex justify-between items-center">
+    <aside className={`bg-gradient-to-b from-gray-900 to-gray-800 text-gray-100 transition-all duration-300 ${isExpanded ? 'w-64' : 'w-20'} min-h-screen flex flex-col shadow-lg`}>
+      <div className="p-4 flex justify-between items-center border-b border-gray-700">
         {isExpanded && (
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-600 text-transparent bg-clip-text">
+          <h1 className="text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 text-transparent bg-clip-text">
             WellHire.ai
           </h1>
         )}
-        <button onClick={toggleSidebar} className="p-2 rounded-full hover:bg-gray-700">
+        <button onClick={toggleSidebar} className="p-2 rounded-full hover:bg-gray-700 text-gray-300 hover:text-white transition-colors">
           {isExpanded ? <ChevronLeft size={20} /> : <ChevronRight size={20} />}
         </button>
       </div>
-      <nav className="flex-1">
+      <nav className="flex-1 py-6 px-2">
         {navItems.map((item) => (
           <Link
             key={item.path}
             to={item.path}
-            className={`flex items-center p-4 hover:bg-gray-700 transition-colors ${
+            className={`flex items-center px-4 py-3 mb-3 rounded-lg transition-all ${
               location.pathname === item.path
-                ? 'bg-purple-600 rounded-l-full mr-4'
-                : ''
+                ? 'bg-gradient-to-r from-purple-600 to-pink-600 text-white shadow-md'
+                : 'hover:bg-gray-700 hover:text-white'
             }`}
           >
-            {item.icon}
-            {isExpanded && <span className="ml-4">{item.label}</span>}
+            <span className="inline-block w-8">{item.icon}</span>
+            {isExpanded && <span className="ml-3 font-medium">{item.label}</span>}
           </Link>
         ))}
       </nav>
-      <div className="p-4">
+      <div className="p-4 border-t border-gray-700">
         <button
           onClick={toggleProfile}
-          className="flex items-center w-full p-3 rounded-lg hover:bg-gray-700 transition-colors"
+          className="flex items-center w-full p-2 rounded-lg hover:bg-gray-700 transition-colors"
         >
           <User size={20} />
-          {isExpanded && <span className="ml-4">Profile</span>}
+          {isExpanded && <span className="ml-3 font-medium">Profile</span>}
         </button>
         {isExpanded && profileOpen && (
-          <div className="mt-2 p-2 bg-gray-700 rounded-lg">
-            <p>John Doe</p>
-            <p className="text-sm text-gray-400">john@example.com</p>
+          <div className="mt-2 p-3 bg-gray-700 rounded-lg shadow-inner">
+            <p className="font-medium">John Doe</p>
+            <p className="text-sm text-gray-300">john@example.com</p>
           </div>
         )}
         {isExpanded && (
           <>
             <Link to="/settings" className="flex items-center mt-4 p-2 rounded-lg hover:bg-gray-700 transition-colors">
               <Settings size={20} />
-              <span className="ml-4">Settings</span>
+              <span className="ml-3 font-medium">Settings</span>
             </Link>
             <Link to="/help" className="flex items-center mt-2 p-2 rounded-lg hover:bg-gray-700 transition-colors">
               <HelpCircle size={20} />
-              <span className="ml-4">Help & Support</span>
+              <span className="ml-3 font-medium">Help & Support</span>
             </Link>
+            <button className="flex items-center mt-4 p-2 w-full rounded-lg bg-red-500 hover:bg-red-600 transition-colors text-white">
+              <LogOut size={20} />
+              <span className="ml-3 font-medium">Logout</span>
+            </button>
           </>
         )}
       </div>

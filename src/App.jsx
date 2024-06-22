@@ -4,11 +4,15 @@ import Candidates from './pages/Candidates';
 import Resumes from './pages/ResumeVault';
 import AIInterview from './pages/AIInterview';
 import Evaluations from './pages/Evaluations';
-// import TalentCompass from './pages/TalentCompass';
+import Sidebar from './components/Sidebar';
+
 
 function App() {
   return (
     <Router>
+      <div className="flex bg-gray-900 text-white min-h-screen">
+      <Sidebar />
+        <div className="flex-1">
       <Routes>
         <Route exact path="/" element={<Dashboard />} />
         <Route path="/candidates" element={<Candidates />} />
@@ -16,6 +20,8 @@ function App() {
         <Route path="/ai-interview" element={<AIInterview />} />
         <Route path="/evaluations" element={<Evaluations />} />
       </Routes>
+      </div>
+      </div>
     </Router>
   );
 }

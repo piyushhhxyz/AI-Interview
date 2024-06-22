@@ -46,25 +46,6 @@ const Dashboard = () => {
 
   return (
     <div className={`flex h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'}`}>
-      {/* Sidebar */}
-      <aside className={`w-64 ${darkMode ? 'bg-gray-800' : 'bg-white'} p-6`}>
-        <h1 className="text-3xl font-bold mb-10 text-purple-500">WellHire.ai</h1>
-        <nav className="space-y-4">
-          {[
-            { icon: <Home size={20} />, label: 'Dashboard', path: '/' },
-            { icon: <Users size={20} />, label: 'Candidates', path: '/candidates' },
-            { icon: <Briefcase size={20} />, label: 'Resumes', path: '/resumes' },
-            { icon: <PieChartIcon size={20} />, label: 'AI Interview', path: '/ai-interview' },
-            { icon: <Settings size={20} />, label: 'Evaluations', path: '/evaluations' },
-          ].map(({ icon, label, path }) => (
-            <Link key={label} to={path} className={`flex items-center space-x-2 ${darkMode ? 'text-gray-300 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}>
-              {icon}
-              <span>{label}</span>
-            </Link>
-          ))}
-        </nav>    
-      </aside>
-
       {/* Main content */}                                        
       <main className="flex-1 p-8 overflow-auto">
         <div className="flex justify-between items-center mb-8">
